@@ -5,10 +5,10 @@ app = Flask(__name__)
 
 # Configuration for AWS RDS MySQL
 db_config = {
-    'user': 'your_username',
-    'password': 'your_password',
-    'host': 'your_host',
-    'database': 'your_database',
+    'user': 'root',
+    'password': '12345678',
+    'host': 'database-1.cmutcd6qjof1.us-east-1.rds.amazonaws.com',
+    'database': 'users',
 }
 
 @app.route('/', methods=['GET', 'POST'])
@@ -22,7 +22,7 @@ def index():
         try:
             connection = mysql.connector.connect(**db_config)
             cursor = connection.cursor()
-            query = "INSERT INTO your_table (name, email, message) VALUES (%s, %s, %s)"
+            query = "INSERT INTO persons (name, email, message) VALUES (%s, %s, %s)"
             values = (name, email, message)
             cursor.execute(query, values)
             connection.commit()
